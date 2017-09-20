@@ -56,7 +56,7 @@ define([], function () {
 
 	Vector.prototype.cross = function (v2) {
 		if (v2 && v2 instanceof Vector) {
-			return this.x * v2.y - v2.x * this.x;
+			return this.x * v2.y - v2.x * this.y;
 		}
 	};
 

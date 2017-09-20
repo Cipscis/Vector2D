@@ -38,8 +38,6 @@ define(
 		};
 
 		Line.prototype.getIntersection = function (otherLine) {
-			// https://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect
-
 			if (!(otherLine instanceof Line)) {
 				console.error('Line.prototype.getIntersection requires another Line');
 				return;
@@ -49,12 +47,13 @@ define(
 				console.warn('Line.prototype.getIntersection was passed parallel lines');
 			}
 
+			// https://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect
+			// var a = (otherLine.origin.subtract(this.origin)).cross(otherLine.direction) / (this.direction.cross(otherLine.direction));
 			var a = (otherLine.origin.subtract(this.origin)).cross(otherLine.direction) / (this.direction.cross(otherLine.direction));
 
-			var intersectionX = this.origin.x + a * this.direction.x;
-			var intersectionY = this.origin.y + a * this.direction.y;
+			var intersection = this.origin.add(this.direction.scale(a));
 
-			return new Vector(intersectionX, intersectionY);
+			return intersection;
 		};
 
 		Line.prototype.isOnLine = function (point) {
